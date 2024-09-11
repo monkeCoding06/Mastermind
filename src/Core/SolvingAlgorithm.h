@@ -11,12 +11,20 @@ public:
 
 
 private:
+    bool solved = false;
     int gameMove = 0;
+    std::string currentGuess[4];
+
 
     void makeFirstGuess(MasterMind &game);
 
     void printGameField(MasterMind &game);
 
+    int checkRightColors(MasterMind &game);
+
+    int checkRightPositions(MasterMind &game);
+
+    void checkAndSafe(MasterMind &game);
 };
 
 
