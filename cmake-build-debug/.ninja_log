@@ -11,3 +11,7 @@
 5675	7654	7477476909483340	Mastermind.exe	373c43210995e61f
 9	642	7477477293175677	CMakeFiles/Mastermind.dir/src/Core/SolvingAlgorithm.cpp.obj	e98991b88cb005cb
 643	866	7477477299531499	Mastermind.exe	373c43210995e61f
+5	436	7477486445050448	CMakeFiles/Mastermind.dir/main.cpp.obj	f9544fc385976315
+9	443	7477486445086127	CMakeFiles/Mastermind.dir/src/Core/MasterMind.cpp.obj	916260f3d4cd1b6
+13	511	7477486445121819	CMakeFiles/Mastermind.dir/src/Core/SolvingAlgorithm.cpp.obj	e98991b88cb005cb
+511	682	7477486450112891	Mastermind.exe	373c43210995e61f
