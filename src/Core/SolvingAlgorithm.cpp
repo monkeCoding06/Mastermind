@@ -99,10 +99,10 @@ void SolvingAlgorithm::resolveFeedBack(MasterMind &game)
 
         if (currentFeedbackScore > bestFeedbackScore) {
             bestFeedbackScore = currentFeedbackScore;
-            bestFeedbackIndex = gameMoveIterator + 1;
+            bestFeedbackIndex = gameMoveIterator;
         }
     }
-    std::cout << "current best game was " << bestFeedbackIndex ;
+    std::cout << "current best game was " << bestFeedbackIndex + 1;
 }
 
 
