@@ -8,8 +8,8 @@ void SolvingAlgorithm::solve(MasterMind &game)
         makeFirstGuess(game);
     }
 
-    performNewGuessBasedOnFeedback(game);
     if (!solved && gameMove <= 12) {
+        performNewGuessBasedOnFeedback(game);
         solve(game);
     }
 }
@@ -130,9 +130,8 @@ void SolvingAlgorithm::performNewGuessBasedOnFeedback(MasterMind &game)
     int bestGuessCommon = feedBackArray[bestFeedbackIndex][0];
     int bestGuessPerfect = feedBackArray[bestFeedbackIndex][1];
 
-    // Implement logic to generate a new guess based on the feedback.
-    // For simplicity, let's assume we just generate a new guess randomly
-    // and will refine this further based on the actual algorithm.
+    // Fucking gay ass logic implementen und donn gehts dahi
+    // For now i randomly generate that shiii
 
     auto colorList = game.getColorList();
     for (int i = 0; i < 4; i++) {
