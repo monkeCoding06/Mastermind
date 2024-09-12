@@ -32,9 +32,9 @@ private:
 
     void checkAndSafe(MasterMind &game);
 
-    void resolveFeedBack(MasterMind &game);
+    void resolveFeedBack();
 
-    void performNewGuessBasedOnFeedback();
+    void performNewGuessBasedOnFeedback(MasterMind &game);
 };
 
 

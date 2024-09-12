@@ -6,7 +6,7 @@ void MasterMind::setColorCode()
     int colorCodeLength = std::end(colorCode) - std::begin(colorCode);
 
     for (int i = 0; i < colorCodeLength; i++) {
-        colorCode[i] = colorList[RandomNumberGenerator::generateRandomNumber(0, 7)];
+        colorCode[i] = colorList[RandomNumberGenerator::generateRandomNumber(0, 5)];
     }
 
 

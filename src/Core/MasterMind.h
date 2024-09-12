@@ -8,7 +8,7 @@
 class MasterMind
 {
 private:
-    std::string colorList[8] = {"blue", "pink", "white", "red", "yellow", "grey", "green", "orange"};
+    std::string colorList[6] = {"blue", "pink", "white", "red", "yellow", "grey"};
     std::string colorCode[4] = {};
 
     void setColorCode();
