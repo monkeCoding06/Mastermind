@@ -8,6 +8,7 @@ void SolvingAlgorithm::solve(MasterMind &game)
         makeFirstGuess(game);
     }
 
+    resolveFeedBack(game);
     makeFirstGuess(game);
     if (!solved && gameMove < 12) {
         solve(game);
@@ -26,8 +27,7 @@ void SolvingAlgorithm::makeFirstGuess(MasterMind &game)
 
 
     printGameField(game);
-    checkRightColors(game);
-    checkRightPositions(game);
+    checkAndSafe(game);
 }
 
 void SolvingAlgorithm::printGameField(MasterMind &game)
@@ -63,8 +63,9 @@ int SolvingAlgorithm::checkRightColors(MasterMind &game)
 int SolvingAlgorithm::checkRightPositions(MasterMind &game)
 {
     int count = 0;
+    auto colorCode = game.getColorCode();
     for (int i = 0; i < 4; i++) {
-        if (currentGuess[i] == game.getColorCode()[i]) {
+        if (currentGuess[i] == colorCode[i]) {
             count++;
         }
     }
@@ -76,6 +77,35 @@ int SolvingAlgorithm::checkRightPositions(MasterMind &game)
 
 void SolvingAlgorithm::checkAndSafe(MasterMind &game)
 {
+    int rightColors = checkRightColors(game);
+    int rightPositions = checkRightPositions(game);
 
+    if (rightPositions == 4) {
+        solved = true;
+    }
+
+    feedBackArray[gameMove - 1][0] = rightColors;
+    feedBackArray[gameMove - 1][1] = rightPositions;
+}
+
+
+void SolvingAlgorithm::resolveFeedBack(MasterMind &game)
+{
+    for (int gameMoveIterator = 0; gameMoveIterator < gameMove - 1; gameMoveIterator++) {
+        int rightColors = feedBackArray[gameMoveIterator][0];
+        int rightPositions = feedBackArray[gameMoveIterator][1];
+
+        int currentFeedbackScore = rightColors + (rightPositions * 2);
+
+        if (currentFeedbackScore > bestFeedbackScore) {
+            bestFeedbackScore = currentFeedbackScore;
+            bestFeedbackIndex = gameMoveIterator + 1;
+        }
+    }
+    std::cout << "current best game was " << bestFeedbackIndex ;
+}
+
+
+void SolvingAlgorithm::performNewGuessBasedOnFeedback(){
 
 }

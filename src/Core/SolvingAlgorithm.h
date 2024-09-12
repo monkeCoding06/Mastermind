@@ -9,11 +9,17 @@ class SolvingAlgorithm
 public:
     void solve(MasterMind &game);
 
+    auto getFeedBackArray()
+    { return feedBackArray; }
+
 
 private:
     bool solved = false;
     int gameMove = 0;
     std::string currentGuess[4];
+    int feedBackArray[12][2];
+    int bestFeedbackIndex = -1;
+    int bestFeedbackScore = -1;
 
 
     void makeFirstGuess(MasterMind &game);
@@ -25,6 +31,10 @@ private:
     int checkRightPositions(MasterMind &game);
 
     void checkAndSafe(MasterMind &game);
+
+    void resolveFeedBack(MasterMind &game);
+
+    void performNewGuessBasedOnFeedback();
 };
 
 
