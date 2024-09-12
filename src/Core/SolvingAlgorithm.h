@@ -15,7 +15,7 @@ public:
 
 private:
     bool solved = false;
-    int gameMove = 0;
+    int gameMove = 1;
     std::string currentGuess[4];
     int feedBackArray[12][2];
     int bestFeedbackIndex = -1;

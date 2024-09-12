@@ -7,8 +7,6 @@ void SolvingAlgorithm::solve(MasterMind &game)
     if (gameMove == 1) {
         makeFirstGuess(game);
     }
-
-    resolveFeedBack();
     makeFirstGuess(game);
     if (!solved && gameMove < 12) {
         solve(game);
@@ -17,7 +15,6 @@ void SolvingAlgorithm::solve(MasterMind &game)
 
 void SolvingAlgorithm::makeFirstGuess(MasterMind &game)
 {
-    gameMove++;
     auto colorList = game.getColorList();
     auto gameField = game.gameField;
     for (int i = 0; i < 4; i++) {
@@ -28,6 +25,8 @@ void SolvingAlgorithm::makeFirstGuess(MasterMind &game)
 
     printGameField(game);
     checkAndSafe(game);
+    resolveFeedBack();
+    gameMove++;
 }
 
 void SolvingAlgorithm::printGameField(MasterMind &game)
@@ -90,7 +89,7 @@ void SolvingAlgorithm::checkAndSafe(MasterMind &game)
 
 void SolvingAlgorithm::resolveFeedBack()
 {
-    for (int gameMoveIterator = 0; gameMoveIterator < gameMove - 1; gameMoveIterator++) {
+    for (int gameMoveIterator = 0; gameMoveIterator < gameMove; gameMoveIterator++) {
         int rightColors = feedBackArray[gameMoveIterator][0];
         int rightPositions = feedBackArray[gameMoveIterator][1];
 
@@ -101,17 +100,19 @@ void SolvingAlgorithm::resolveFeedBack()
             bestFeedbackIndex = gameMoveIterator;
         }
     }
-    std::cout << "current best game was " << bestFeedbackIndex + 1;
+    std::cout << "current best game: " << bestFeedbackIndex + 1;
 }
 
 
-void SolvingAlgorithm::performNewGuessBasedOnFeedback(MasterMind &game){
+void SolvingAlgorithm::performNewGuessBasedOnFeedback(MasterMind &game)
+{
     auto gameField = game.gameField;
     std::string bestGuess[4];
     std::string newGuess[4];
 
-    for(int i = 0; i < 4; i++){
+    for (int i = 0; i < 4; i++) {
         bestGuess[i] = gameField[bestFeedbackIndex][i];
     }
+
 
 }
