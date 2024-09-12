@@ -40,26 +40,24 @@ void SolvingAlgorithm::printGameField(MasterMind &game)
     std::cout << "\t" << gameMove << "\t";
 }
 
-int SolvingAlgorithm::checkRightColors(MasterMind &game)
+int SolvingAlgorithm::checkRightColors(MasterMind &game) const
 {
-    std::string *colorCode = game.getColorCode(); // This is the correct color code for the game
-    auto guess = game.gameField[gameMove - 1]; // This is the guess from the current move
+    std::string *colorCode = game.getColorCode();
+    auto guess = game.gameField[gameMove - 1];
 
     std::unordered_map<std::string, int> colorCodeCount;
     std::unordered_map<std::string, int> guessCount;
 
-    // Count occurrences of each color in the color code
     for (int i = 0; i < 4; i++) {
         colorCodeCount[colorCode[i]]++;
     }
 
-    // Count occurrences of each color in the current guess
     for (int i = 0; i < 4; i++) {
         guessCount[guess[i]]++;
     }
 
     int count = 0;
-    // Calculate common colors
+
     for (const auto& pair : guessCount) {
         if (colorCodeCount.find(pair.first) != colorCodeCount.end()) {
             count += std::min(pair.second, colorCodeCount[pair.first]);
@@ -72,7 +70,7 @@ int SolvingAlgorithm::checkRightColors(MasterMind &game)
 }
 
 
-int SolvingAlgorithm::checkRightPositions(MasterMind &game)
+int SolvingAlgorithm::checkRightPositions(MasterMind &game) const
 {
     int count = 0;
     auto colorCode = game.getColorCode();

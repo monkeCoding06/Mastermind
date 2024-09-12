@@ -26,9 +26,9 @@ private:
 
     void printGameField(MasterMind &game);
 
-    int checkRightColors(MasterMind &game);
+    int checkRightColors(MasterMind &game) const;
 
-    int checkRightPositions(MasterMind &game);
+    int checkRightPositions(MasterMind &game) const;
 
     void checkAndSafe(MasterMind &game);
 
