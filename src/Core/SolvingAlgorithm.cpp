@@ -7,8 +7,9 @@ void SolvingAlgorithm::solve(MasterMind &game)
     if (gameMove == 1) {
         makeFirstGuess(game);
     }
-    makeFirstGuess(game);
-    if (!solved && gameMove < 12) {
+
+    performNewGuessBasedOnFeedback(game);
+    if (!solved && gameMove <= 12) {
         solve(game);
     }
 }
@@ -41,29 +42,43 @@ void SolvingAlgorithm::printGameField(MasterMind &game)
 
 int SolvingAlgorithm::checkRightColors(MasterMind &game)
 {
-    std::string *colorCode = game.getColorCode();
+    std::string *colorCode = game.getColorCode(); // This is the correct color code for the game
+    auto guess = game.gameField[gameMove - 1]; // This is the guess from the current move
 
-    std::unordered_map<std::string, int> colorCodeCount, guessCount;
+    std::unordered_map<std::string, int> colorCodeCount;
+    std::unordered_map<std::string, int> guessCount;
+
+    // Count occurrences of each color in the color code
     for (int i = 0; i < 4; i++) {
         colorCodeCount[colorCode[i]]++;
-        guessCount[currentGuess[i]]++;
+    }
+
+    // Count occurrences of each color in the current guess
+    for (int i = 0; i < 4; i++) {
+        guessCount[guess[i]]++;
     }
 
     int count = 0;
-    for (const auto &pair: guessCount) {
-        count += std::min(pair.second, colorCodeCount[pair.first]);
+    // Calculate common colors
+    for (const auto& pair : guessCount) {
+        if (colorCodeCount.find(pair.first) != colorCodeCount.end()) {
+            count += std::min(pair.second, colorCodeCount[pair.first]);
+        }
     }
 
     std::cout << "common colors: " << count << "\t";
+
     return count;
 }
+
 
 int SolvingAlgorithm::checkRightPositions(MasterMind &game)
 {
     int count = 0;
     auto colorCode = game.getColorCode();
+    auto gameField = game.gameField;
     for (int i = 0; i < 4; i++) {
-        if (currentGuess[i] == colorCode[i]) {
+        if (gameField[gameMove - 1][i] == colorCode[i]) {
             count++;
         }
     }
@@ -90,7 +105,7 @@ void SolvingAlgorithm::checkAndSafe(MasterMind &game)
 void SolvingAlgorithm::resolveFeedBack()
 {
     for (int gameMoveIterator = 0; gameMoveIterator < gameMove; gameMoveIterator++) {
-        int rightColors = feedBackArray[gameMoveIterator][0];
+        int rightColors = feedBackArray[gameMoveIterator - 1][0];
         int rightPositions = feedBackArray[gameMoveIterator][1];
 
         int currentFeedbackScore = rightColors + (rightPositions * 2);
@@ -114,5 +129,24 @@ void SolvingAlgorithm::performNewGuessBasedOnFeedback(MasterMind &game)
         bestGuess[i] = gameField[bestFeedbackIndex][i];
     }
 
+    int bestGuessCommon = feedBackArray[bestFeedbackIndex][0];
+    int bestGuessPerfect = feedBackArray[bestFeedbackIndex][1];
 
+    // Implement logic to generate a new guess based on the feedback.
+    // For simplicity, let's assume we just generate a new guess randomly
+    // and will refine this further based on the actual algorithm.
+
+    auto colorList = game.getColorList();
+    for (int i = 0; i < 4; i++) {
+        newGuess[i] = colorList[RandomNumberGenerator::generateRandomNumber(0, 5)];
+    }
+
+    for (int i = 0; i < 4; i++) {
+        gameField[gameMove - 1][i] = newGuess[i];
+    }
+
+    printGameField(game);
+    checkAndSafe(game);
+    resolveFeedBack();
+    gameMove++;
 }
