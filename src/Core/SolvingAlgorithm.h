@@ -28,7 +28,7 @@ private:
 
     void makeFirstGuess(MasterMind &game);
 
-    void printGameField(MasterMind &game);
+    void printGameField(MasterMind &game) const;
 
     int checkRightColors(MasterMind &game) const;
 
@@ -42,9 +42,9 @@ private:
 
     bool isCodeValid(int *code, MasterMind &game);
 
-    int checkRightColorsForCode(int *guess, int *code);
+    static int checkRightColorsForCode(int *guess, int *code);
 
-    int checkRightPositionsForCode(int *guess, int *code);
+    static int checkRightPositionsForCode(int *guess, int *code);
 
     void createEveryPosibility();
 };
