@@ -3,6 +3,7 @@
 #define MASTERMIND_SOLVINGALGORITHM_H
 
 #include "MasterMind.h"
+#include <cmath>
 
 class SolvingAlgorithm
 {
@@ -21,6 +22,9 @@ private:
     int bestFeedbackIndex = -1;
     int bestFeedbackScore = -1;
 
+    int possibilities = pow(6, 4);
+    int possibleCodes[1296][4];
+
 
     void makeFirstGuess(MasterMind &game);
 
@@ -35,6 +39,14 @@ private:
     void resolveFeedBack();
 
     void performNewGuessBasedOnFeedback(MasterMind &game);
+
+    bool isCodeValid(int *code, MasterMind &game);
+
+    int checkRightColorsForCode(int *guess, int *code);
+
+    int checkRightPositionsForCode(int *guess, int *code);
+
+    void createEveryPosibility();
 };
 
 
