@@ -12,6 +12,12 @@ void SolvingAlgorithm::solve(MasterMind &game)
     if (!solved && gameMove <= 11) {
         performNewGuessBasedOnFeedback(game);
         solve(game);
+        return;
+    }
+
+    if (solved) {
+        std::cout << "\n\tPattern found!" << std::endl;
+        return;
     }
 }
 
@@ -31,8 +37,7 @@ void SolvingAlgorithm::makeFirstGuess(MasterMind &game)
 
     printGameField(game);
     checkAndSafe(game);
-    resolveFeedBack();
-    ++gameMove;
+    gameMove++;
 }
 
 
@@ -75,7 +80,7 @@ int SolvingAlgorithm::checkRightPositions(MasterMind &game) const
     int count = 0;
     for (int i = 0; i < 4; ++i) {
         if (gameField[gameMove][i] == colorCode[i]) {
-            ++count;
+            count++;
         }
     }
 
@@ -96,28 +101,11 @@ void SolvingAlgorithm::checkAndSafe(MasterMind &game)
     feedBackArray[gameMove][1] = rightPositions;
 }
 
-void SolvingAlgorithm::resolveFeedBack()
-{
-    if (gameMove <= 0) { return; }
-
-    for (int gameMoveIterator = 0; gameMoveIterator < gameMove; ++gameMoveIterator) {
-        int rightColors = feedBackArray[gameMoveIterator][0];
-        int rightPositions = feedBackArray[gameMoveIterator][1];
-        int currentFeedbackScore = rightColors + (rightPositions * 2);
-
-        if (currentFeedbackScore > bestFeedbackScore) {
-            bestFeedbackScore = currentFeedbackScore;
-            bestFeedbackIndex = gameMoveIterator;
-        }
-    }
-    std::cout << "current best game: " << (bestFeedbackIndex + 1) << std::endl;
-}
-
 void SolvingAlgorithm::performNewGuessBasedOnFeedback(MasterMind &game)
 {
     bool foundValidGuess = false;
 
-    for (int i = 0; i < possibilities; ++i) {
+    for (int i = 0; i < possibilities; i++) {
         if (isCodeValid(possibleCodes[i], game)) {
             for (int j = 0; j < 4; ++j) {
                 currentGuess[j] = game.getColorList()[possibleCodes[i][j]];
@@ -134,21 +122,18 @@ void SolvingAlgorithm::performNewGuessBasedOnFeedback(MasterMind &game)
 
     printGameField(game);
     checkAndSafe(game);
-    resolveFeedBack();
-    ++gameMove;
+    gameMove++;
 }
 
 int SolvingAlgorithm::checkRightColorsForCode(int guess[4], int code[4])
 {
     std::unordered_map<int, int> codeCount, guessCount;
 
-    // Count occurrences of each color in the guess and the code
     for (int i = 0; i < 4; ++i) {
         codeCount[code[i]]++;
         guessCount[guess[i]]++;
     }
 
-    // Calculate the number of correct colors (ignoring position)
     int count = 0;
     for (const auto &pair: guessCount) {
         count += std::min(pair.second, codeCount[pair.first]);
@@ -159,7 +144,6 @@ int SolvingAlgorithm::checkRightColorsForCode(int guess[4], int code[4])
 int SolvingAlgorithm::checkRightPositionsForCode(int guess[4], int code[4])
 {
     int count = 0;
-    // Check how many colors are in the correct position
     for (int i = 0; i < 4; ++i) {
         if (guess[i] == code[i]) {
             ++count;
