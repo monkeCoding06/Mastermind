@@ -1,6 +1,3 @@
-//
-// Created by lkohlfuerst on 10/09/2024.
-//
 
 #ifndef MASTERMIND_RANDOMNUMBERGENERATOR_H
 #define MASTERMIND_RANDOMNUMBERGENERATOR_H

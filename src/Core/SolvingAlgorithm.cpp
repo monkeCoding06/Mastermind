@@ -9,17 +9,19 @@ void SolvingAlgorithm::solve(MasterMind &game)
         makeFirstGuess(game);
     }
 
-    if (!solved && gameMove <= 11) {
-        performNewGuessBasedOnFeedback(game);
-        solve(game);
-        return;
-    }
-
     if (solved) {
         std::cout << "\n\tPattern found!" << std::endl;
         return;
     }
+
+    if (gameMove > 11) {
+        return;
+    }
+
+    performNewGuessBasedOnFeedback(game);
+    solve(game);
 }
+
 
 void SolvingAlgorithm::makeFirstGuess(MasterMind &game)
 {
@@ -140,7 +142,6 @@ int SolvingAlgorithm::checkRightColorsForCode(int guess[4], int code[4])
     }
     return count;
 }
-
 int SolvingAlgorithm::checkRightPositionsForCode(int guess[4], int code[4])
 {
     int count = 0;
@@ -156,9 +157,9 @@ bool SolvingAlgorithm::isCodeValid(int code[4], MasterMind &game)
 {
     const auto &colorList = game.getColorList();
 
-    for (int prevMove = 0; prevMove < gameMove; ++prevMove) {
+    for (int prevMove = 0; prevMove < gameMove; prevMove++) {
         int tempGuess[4];
-        for (int i = 0; i < 4; ++i) {
+        for (int i = 0; i < 4; i++) {
             tempGuess[i] = std::distance(colorList.begin(),
                                          std::find(colorList.begin(), colorList.end(), game.gameField[prevMove][i]));
         }
