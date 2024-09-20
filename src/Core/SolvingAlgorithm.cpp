@@ -33,7 +33,7 @@ void SolvingAlgorithm::makeFirstGuess(MasterMind &game)
     currentGuess[2] = colorList[1];
     currentGuess[3] = colorList[1];
 
-    for (int i = 0; i < 4; ++i) {
+    for (int i = 0; i < 4; i++) {
         gameField[gameMove][i] = currentGuess[i];
     }
 
@@ -60,7 +60,7 @@ int SolvingAlgorithm::checkRightColors(MasterMind &game) const
 
     std::unordered_map<std::string, int> colorCodeCount, guessCount;
 
-    for (int i = 0; i < 4; ++i) {
+    for (int i = 0; i < 4; i++) {
         colorCodeCount[colorCode[i]]++;
         guessCount[guess[i]]++;
     }
@@ -80,7 +80,7 @@ int SolvingAlgorithm::checkRightPositions(MasterMind &game) const
     const auto &gameField = game.gameField;
 
     int count = 0;
-    for (int i = 0; i < 4; ++i) {
+    for (int i = 0; i < 4; i++) {
         if (gameField[gameMove][i] == colorCode[i]) {
             count++;
         }
@@ -109,7 +109,7 @@ void SolvingAlgorithm::performNewGuessBasedOnFeedback(MasterMind &game)
 
     for (int i = 0; i < possibilities; i++) {
         if (isCodeValid(possibleCodes[i], game)) {
-            for (int j = 0; j < 4; ++j) {
+            for (int j = 0; j < 4; j++) {
                 currentGuess[j] = game.getColorList()[possibleCodes[i][j]];
                 game.gameField[gameMove][j] = currentGuess[j];
             }
@@ -131,7 +131,7 @@ int SolvingAlgorithm::checkRightColorsForCode(int guess[4], int code[4])
 {
     std::unordered_map<int, int> codeCount, guessCount;
 
-    for (int i = 0; i < 4; ++i) {
+    for (int i = 0; i < 4; i++) {
         codeCount[code[i]]++;
         guessCount[guess[i]]++;
     }
@@ -145,7 +145,7 @@ int SolvingAlgorithm::checkRightColorsForCode(int guess[4], int code[4])
 int SolvingAlgorithm::checkRightPositionsForCode(int guess[4], int code[4])
 {
     int count = 0;
-    for (int i = 0; i < 4; ++i) {
+    for (int i = 0; i < 4; i++) {
         if (guess[i] == code[i]) {
             ++count;
         }
@@ -179,7 +179,7 @@ bool SolvingAlgorithm::isCodeValid(int code[4], MasterMind &game)
 
 void SolvingAlgorithm::createEveryPosibility()
 {
-    for (int i = 0; i < possibilities; ++i) {
+    for (int i = 0; i < possibilities; i++) {
         int code = i;
         for (int j = 3; j >= 0; --j) {
             possibleCodes[i][j] = code % 6;
