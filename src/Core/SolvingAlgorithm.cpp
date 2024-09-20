@@ -118,7 +118,7 @@ void SolvingAlgorithm::performNewGuessBasedOnFeedback(MasterMind &game)
         }
     }
 
-    if (!foundValidGuess) {
+    if (foundValidGuess == false) {
         std::cerr << "No valid guess found!" << std::endl;
     }
 
