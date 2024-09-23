@@ -12,3 +12,8 @@
 997	1239	7485255010868882	Mastermind.exe	373c43210995e61f
 5	809	7485255870086216	CMakeFiles/Mastermind.dir/src/Core/SolvingAlgorithm.cpp.obj	e98991b88cb005cb
 809	1006	7485255878129271	Mastermind.exe	373c43210995e61f
+6	718	7485278025225820	CMakeFiles/Mastermind.dir/main.cpp.obj	f9544fc385976315
+12	741	7485278025275656	CMakeFiles/Mastermind.dir/src/Core/MasterMind.cpp.obj	916260f3d4cd1b6
+15	747	7485278025315534	CMakeFiles/Mastermind.dir/src/Utility/RandomNumberGenerator.cpp.obj	56caf32f1d897ce4
+7	783	7485278617267226	CMakeFiles/Mastermind.dir/src/Core/SolvingAlgorithm.cpp.obj	e98991b88cb005cb
+784	1020	7485278625033405	Mastermind.exe	373c43210995e61f

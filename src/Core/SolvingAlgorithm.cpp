@@ -169,7 +169,7 @@ bool SolvingAlgorithm::isCodeValid(int code[4], MasterMind &game)
 
         int actualRightColors = checkRightColorsForCode(tempGuess, code);
         int actualRightPositions = checkRightPositionsForCode(tempGuess, code);
-
+        
         if (actualRightColors != expectedRightColors || actualRightPositions != expectedRightPositions) {
             return false;
         }
