@@ -1,45 +1,37 @@
+#ifndef SOLVINGALGORITHM_H
+#define SOLVINGALGORITHM_H
 
-#ifndef MASTERMIND_SOLVINGALGORITHM_H
-#define MASTERMIND_SOLVINGALGORITHM_H
-
+#include <vector>
+#include <string>
+#include <utility>
 #include "MasterMind.h"
-#include <cmath>
 
-class SolvingAlgorithm
-{
+class SolvingAlgorithm {
 public:
-    void solve(MasterMind &game);
-
-    auto getFeedBackArray()
-    { return feedBackArray; }
-
-
-private:
-    bool solved = false;
-    int gameMove = 1;
-    std::string currentGuess[4];
-    int feedBackArray[12][2];
-
-    int possibilities = pow(6, 4);
-    int possibleCodes[1296][4];
-
+    explicit SolvingAlgorithm(MasterMind &game);
 
     void makeFirstGuess(MasterMind &game);
-
-    void printGameField(MasterMind &game) const;
-
-    int checkRightColors(MasterMind &game) const;
-
-    int checkRightPositions(MasterMind &game) const;
-
-    void checkAndSafe(MasterMind &game);
-
-
     void performNewGuessBasedOnFeedback(MasterMind &game);
 
-    void createEveryPosibility();
+private:
+    void eliminateImpossibleCodes(const std::vector<std::string>& guess, int rightColors, int rightPositions);
+    std::vector<std::string> selectNextGuess();
 
+    int gameMove = 1;
+    bool solved = false;
+    std::vector<std::vector<std::string>> possibleCodes;
+    std::vector<std::string> currentGuess;
+
+    int feedBackArray[12][2];
+    void createPossibilities(MasterMind &game);
+
+    int checkRightColors(MasterMind &game);
+
+    int checkRightPositions(MasterMind &game);
+
+    void solve(MasterMind &game);
+
+    void printGameField(MasterMind &game) const;
 };
 
-
-#endif //MASTERMIND_SOLVINGALGORITHM_H
+#endif

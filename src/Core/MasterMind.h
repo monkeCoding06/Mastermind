@@ -2,7 +2,7 @@
 #define MASTERMIND_MASTERMIND_H
 
 #include <iostream>
-#include <vector> // Include vector header
+#include <vector>
 #include "../Utility/RandomNumberGenerator.h"
 
 class MasterMind
@@ -20,10 +20,13 @@ public:
     std::string gameField[12][4];
 
     auto getColorList() const
-    { return colorList; } // Return as std::vector<std::string>
+    { return colorList; }
 
     auto getColorCode() const
     { return colorCode; }
+
+    std::pair<int, int> getFeedback(const std::vector<std::string>& guess);
+
 };
 
 #endif //MASTERMIND_MASTERMIND_H
