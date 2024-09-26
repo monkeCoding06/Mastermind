@@ -6,7 +6,7 @@
 #include <utility>
 #include "MasterMind.h"
 
-class SolvingAlgorithm {
+class SolvingAlgorithm{
 public:
     explicit SolvingAlgorithm(MasterMind &game);
 
@@ -23,12 +23,7 @@ private:
     std::vector<std::vector<std::string>> possibleCodes;
     std::vector<std::string> currentGuess;
 
-    int feedBackArray[12][2]{};
     void createPossibilities(MasterMind &game);
-
-    int checkRightColors(MasterMind &game);
-
-    int checkRightPositions(MasterMind &game);
 
 
     void printGameField(MasterMind &game) const;

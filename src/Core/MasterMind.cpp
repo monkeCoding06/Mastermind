@@ -39,7 +39,6 @@ std::pair<int, int> MasterMind::getFeedback(const std::vector<std::string> &gues
     bool matchedSecret[4] = {false};
     bool matchedGuess[4] = {false};
 
-    // Check for correct positions first
     for (int i = 0; i < 4; ++i) {
         if (guess[i] == colorCode[i]) {
             rightPositions++;
@@ -48,7 +47,6 @@ std::pair<int, int> MasterMind::getFeedback(const std::vector<std::string> &gues
         }
     }
 
-    // Check for correct colors in wrong positions
     for (int i = 0; i < 4; ++i) {
         if (!matchedGuess[i]) {
             for (int j = 0; j < 4; ++j) {
