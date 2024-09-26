@@ -12,24 +12,24 @@ public:
 
     void makeFirstGuess(MasterMind &game);
     void performNewGuessBasedOnFeedback(MasterMind &game);
+    void solve(MasterMind &game);
 
 private:
     void eliminateImpossibleCodes(const std::vector<std::string>& guess, int rightColors, int rightPositions);
     std::vector<std::string> selectNextGuess();
 
-    int gameMove = 1;
+    int gameMove = 0;
     bool solved = false;
     std::vector<std::vector<std::string>> possibleCodes;
     std::vector<std::string> currentGuess;
 
-    int feedBackArray[12][2];
+    int feedBackArray[12][2]{};
     void createPossibilities(MasterMind &game);
 
     int checkRightColors(MasterMind &game);
 
     int checkRightPositions(MasterMind &game);
 
-    void solve(MasterMind &game);
 
     void printGameField(MasterMind &game) const;
 };

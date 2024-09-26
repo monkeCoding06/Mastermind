@@ -4,7 +4,8 @@
 #include <string>
 
 SolvingAlgorithm::SolvingAlgorithm(MasterMind &game) {
-    currentGuess = {"blue", "blue", "pink", "pink"};
+    auto colors = game.getColorList();
+    currentGuess = {colors[0], colors[0], colors[1], colors[1]};
     createPossibilities(game);
 }
 
@@ -38,20 +39,23 @@ void SolvingAlgorithm::solve(MasterMind &game) {
             std::cout << std::endl;
         }
 
-        std::cout << "Current guess after feedback: ";
-        for (const auto &color : currentGuess) {
-            std::cout << color << " ";
-        }
-        std::cout << std::endl;
+
+
+//        std::cout << "Current guess after feedback: ";
+//        for (const auto &color : currentGuess) {
+//            std::cout << color << " ";
+//        }
+//        std::cout << std::endl;
     }
 }
 
 void SolvingAlgorithm::makeFirstGuess(MasterMind &game) {
-    std::cout << "First guess: ";
+//    std::cout << "First guess: ";
     for (int i = 0; i < 4; ++i) {
         std::cout << currentGuess[i] << " ";
     }
     std::cout << std::endl;
+    gameMove++;
 }
 
 void SolvingAlgorithm::createPossibilities(MasterMind &game) {
@@ -117,7 +121,7 @@ void SolvingAlgorithm::eliminateImpossibleCodes(const std::vector<std::string>& 
         int possibleRightPositions = 0;
         int possibleRightColors = 0;
 
-        std::vector<std::string> possibleCode = *i;
+        std::vector<std::string> possibleCode = *iterator;
 
         std::vector<bool> matchedGuess(4, false);
         std::vector<bool> matchedCode(4, false);
@@ -143,9 +147,9 @@ void SolvingAlgorithm::eliminateImpossibleCodes(const std::vector<std::string>& 
         }
 
         if (possibleRightColors != rightColors || possibleRightPositions != rightPositions) {
-            i = possibleCodes.erase(i);
+            iterator = possibleCodes.erase(iterator);
         } else {
-            ++i;
+            ++iterator;
         }
     }
     std::cout << "Remaining possible codes: " << possibleCodes.size() << std::endl;
@@ -180,6 +184,7 @@ void SolvingAlgorithm::performNewGuessBasedOnFeedback(MasterMind &game) {
         std::cout << currentGuess[i] << "\t";
     }
     std::cout << std::endl;
+    gameMove++;
 }
 void SolvingAlgorithm::printGameField(MasterMind &game) const
 {
