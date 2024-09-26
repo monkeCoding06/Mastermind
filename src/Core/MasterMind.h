@@ -8,6 +8,8 @@
 class MasterMind
 {
     friend class SolvingAlgorithm;
+
+
 private:
     std::vector<std::string> colorList = {"blue", "pink", "white", "red", "yellow", "grey"};
     std::string colorCode[4] = {};
