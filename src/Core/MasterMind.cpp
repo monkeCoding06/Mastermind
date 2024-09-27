@@ -14,13 +14,13 @@ void MasterMind::setColorCode()
 
 void MasterMind::printColorCode()
 {
-    std::cout << "____________________________________________________" << std::endl;
+    std::cout << "------------------------------------------------------------------------------------------" << std::endl;
     std::cout << "set color code: " << std::endl;
     for (auto &color: colorCode) {
         std::cout << "\t" << color;
     }
     std::cout << std::endl;
-    std::cout << "____________________________________________________" << std::endl;
+    std::cout << "------------------------------------------------------------------------------------------" << std::endl;
 }
 
 

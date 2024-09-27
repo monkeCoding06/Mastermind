@@ -76,13 +76,19 @@ void SolvingAlgorithm::eliminateImpossibleCodes(const std::vector<std::string> &
         }
 
         for (int i = 0; i < 4; ++i) {
-            if (!matchedGuess[i]) {
-                for (int j = 0; j < 4; ++j) {
-                    if (!matchedCode[j] && possibleCode[i] == guess[j]) {
-                        possibleRightColors++;
-                        matchedCode[j] = true;
-                        break;
-                    }
+            if (matchedGuess[i]) {
+                continue;
+            }
+
+            for (int j = 0; j < 4; ++j) {
+                if (matchedCode[j]) {
+                    continue;
+                }
+
+                if (possibleCode[i] == guess[j]) {
+                    possibleRightColors++;
+                    matchedCode[j] = true;
+                    break;
                 }
             }
         }
@@ -93,7 +99,9 @@ void SolvingAlgorithm::eliminateImpossibleCodes(const std::vector<std::string> &
             ++iterator;
         }
     }
-    std::cout << "\tRemaining possible codes: " << possibleCodes.size() << "\t |" << std::endl << "----------------------------------------------------------------------------------------" << std::endl;
+    std::cout << "\tRemaining possible codes: " << possibleCodes.size() << "\t |" << std::endl
+              << "------------------------------------------------------------------------------------------"
+              << std::endl;
 }
 
 std::vector<std::string> SolvingAlgorithm::selectNextGuess()
@@ -108,7 +116,7 @@ std::vector<std::string> SolvingAlgorithm::selectNextGuess()
 
 void SolvingAlgorithm::performNewGuessBasedOnFeedback(MasterMind &game)
 {
-    auto feedback = game.getFeedback(currentGuess);
+    std::pair<int, int> feedback = game.getFeedback(currentGuess);
     int rightColors = feedback.first;
     int rightPositions = feedback.second;
 

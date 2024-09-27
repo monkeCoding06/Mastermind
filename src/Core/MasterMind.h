@@ -22,11 +22,8 @@ public:
 
     std::string gameField[12][4];
 
-    auto getColorList() const
+    [[nodiscard]] auto getColorList() const
     { return colorList; }
-
-    auto getColorCode() const
-    { return colorCode; }
 
 protected:
 
