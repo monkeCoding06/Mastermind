@@ -130,50 +130,28 @@ std::vector<std::string> SolvingAlgorithm::selectNextGuess(MasterMind &game)
         return {};
     }
 
-    std::map<std::string, int> scoreCount;
-
-    std::vector<std::string> bestGuess;
-    int bestScore = INT_MAX;
-
-    for (const auto& guess : possibleCodes)
+    for (auto guessToCheck: possibleCodes)
     {
-        std::map<std::pair<int, int>, int> pegScoreFrequencies;
-
-        for (const auto& hiddenCode : possibleCodes)
+        std::string penis[4];
+        for (int i = 0; i < 4; ++i)
         {
-            std::pair<int, int> score = game.getFeedback(guess);
-
-            pegScoreFrequencies[score]++;
+            penis[i] = guessToCheck[i];
         }
 
-        int worstCaseScore = 0;
-        for (const auto& entry : pegScoreFrequencies)
+        for (auto guess: possibleCodes)
         {
-            if (entry.second > worstCaseScore)
-            {
-                worstCaseScore = entry.second;
-            }
-        }
-
-        if (worstCaseScore < bestScore)
-        {
-            bestScore = worstCaseScore;
-            bestGuess = guess;
+            game.getFeedback(guess, penis);
         }
     }
 
-    if (!bestGuess.empty())
-    {
-        return {bestGuess};
-    }
 
-    return {possibleCodes.front()};
+    return possibleCodes.front();
 }
 
 
 void SolvingAlgorithm::performNewGuessBasedOnFeedback(MasterMind &game)
 {
-    std::pair<int, int> feedback = game.getFeedback(currentGuess);
+    std::pair<int, int> feedback = game.getFeedback(currentGuess, game.colorCode);
     int rightColors = feedback.first;
     int rightPositions = feedback.second;
 
@@ -204,7 +182,8 @@ void SolvingAlgorithm::performNewGuessBasedOnFeedback(MasterMind &game)
 
 void SolvingAlgorithm::printGameField(MasterMind &game) const
 {
-    if (solved) { return; }
+    if (solved)
+    { return; }
     std::cout << gameMove;
 
     auto gameField = game.gameField;

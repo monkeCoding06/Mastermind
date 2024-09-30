@@ -12,13 +12,13 @@ class MasterMind
 
 private:
     std::vector<std::string> colorList = {"blue", "pink", "white", "red", "yellow", "grey"};
-    std::string colorCode[4] = {};
 
     void setColorCode();
     void printColorCode();
 
 public:
     MasterMind();
+    std::string colorCode[4] = {};
 
     std::string gameField[12][4];
 
@@ -27,7 +27,7 @@ public:
 
 protected:
 
-    std::pair<int, int> getFeedback(const std::vector<std::string>& guess);
+    std::pair<int, int> getFeedback(const std::vector<std::string>& guess,std::string colorCodeToCheck[4]);
 };
 
 #endif //MASTERMIND_MASTERMIND_H
