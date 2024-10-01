@@ -6,5 +6,8 @@ int main()
     MasterMind masterMind;
     SolvingAlgorithm solvingAlgorithm(masterMind);
 
-solvingAlgorithm.solve(masterMind);
+    int test = solvingAlgorithm.solve(masterMind);
+
+    std::cout << "in main: " << test << std::endl;
+
 }

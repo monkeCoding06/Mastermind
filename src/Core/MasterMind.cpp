@@ -9,8 +9,6 @@ void MasterMind::setColorCode()
     {
         colorCode[i] = colorList[RandomNumberGenerator::generateRandomNumber(0, 5)];
     }
-
-
 }
 
 void MasterMind::printColorCode()
@@ -35,7 +33,7 @@ MasterMind::MasterMind()
 }
 
 
-std::pair<int, int> MasterMind::getFeedback(const StringVector &guess, std::string colorCodeToCheck[4])
+IntPair MasterMind::getFeedback(const StringVector &guess, std::string colorCodeToCheck[4])
 {
 //    for (int i = 0; i < 4; ++i)
 //    {

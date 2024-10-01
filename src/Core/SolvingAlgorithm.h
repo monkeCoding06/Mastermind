@@ -13,7 +13,7 @@ public:
 
     void makeFirstGuess(MasterMind &game);
     void performNewGuessBasedOnFeedback(MasterMind &game);
-    void solve(MasterMind &game);
+    int solve(MasterMind &game);
 
 private:
     void eliminateImpossibleCodes(const std::vector<std::string>& guess, int rightColors, int rightPositions);

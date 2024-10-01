@@ -7,6 +7,7 @@
 
 typedef std::vector<std::string> StringVector;
 typedef std::vector<bool> BoolVector;
+typedef std::pair<int, int> IntPair;
 
 class MasterMind
 {
@@ -27,12 +28,11 @@ public:
 
     std::string gameField[12][4];
 
-    [[nodiscard]] auto getColorList() const
-    { return colorList; }
+    [[nodiscard]] StringVector getColorList() const { return colorList; }
 
 protected:
 
-    std::pair<int, int> getFeedback(const std::vector<std::string> &guess, std::string colorCodeToCheck[4]);
+    IntPair getFeedback(const std::vector<std::string> &guess, std::string colorCodeToCheck[4]);
 };
 
 #endif //MASTERMIND_MASTERMIND_H
