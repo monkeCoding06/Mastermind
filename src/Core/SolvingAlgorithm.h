@@ -6,6 +6,7 @@
 #include <utility>
 #include "MasterMind.h"
 
+
 class SolvingAlgorithm{
 public:
     explicit SolvingAlgorithm(MasterMind &game);
@@ -16,12 +17,12 @@ public:
 
 private:
     void eliminateImpossibleCodes(const std::vector<std::string>& guess, int rightColors, int rightPositions);
-    std::vector<std::string> selectNextGuess(MasterMind &game);
+    StringVector selectNextGuess(MasterMind &game);
 
     int gameMove = 0;
     bool solved = false;
     std::vector<std::vector<std::string>> possibleCodes;
-    std::vector<std::string> currentGuess;
+    StringVector currentGuess;
 
     void createPossibilities(MasterMind &game);
 

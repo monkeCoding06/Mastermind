@@ -47,10 +47,10 @@ void SolvingAlgorithm::makeFirstGuess(MasterMind &game)
 
 void SolvingAlgorithm::createPossibilities(MasterMind &game)
 {
-    std::vector<std::string> colorList = game.getColorList();
+    StringVector colorList = game.getColorList();
     for (int i = 0; i < 1296; ++i)
     {
-        std::vector<std::string> possibility(4);
+        StringVector possibility(4);
         int code = i;
         for (int j = 3; j >= 0; --j)
         {
@@ -62,8 +62,9 @@ void SolvingAlgorithm::createPossibilities(MasterMind &game)
     std::cout << "Total possibilities: " << possibleCodes.size() << std::endl;
 }
 
+
 void
-SolvingAlgorithm::eliminateImpossibleCodes(const std::vector<std::string> &guess, int rightColors, int rightPositions)
+SolvingAlgorithm::eliminateImpossibleCodes(const StringVector &guess, int rightColors, int rightPositions)
 {
     auto iterator = possibleCodes.begin();
     while (iterator != possibleCodes.end())
@@ -71,10 +72,10 @@ SolvingAlgorithm::eliminateImpossibleCodes(const std::vector<std::string> &guess
         int possibleRightPositions = 0;
         int possibleRightColors = 0;
 
-        std::vector<std::string> possibleCode = *iterator;
+        StringVector possibleCode = *iterator;
 
-        std::vector<bool> matchedGuess(4, false);
-        std::vector<bool> matchedCode(4, false);
+        BoolVector matchedGuess(4, false);
+        BoolVector matchedCode(4, false);
 
         for (int i = 0; i < 4; ++i)
         {
@@ -122,7 +123,7 @@ SolvingAlgorithm::eliminateImpossibleCodes(const std::vector<std::string> &guess
               << std::endl;
 }
 
-std::vector<std::string> SolvingAlgorithm::selectNextGuess(MasterMind &game)
+StringVector SolvingAlgorithm::selectNextGuess(MasterMind &game)
 {
     if (possibleCodes.empty())
     {
@@ -130,17 +131,28 @@ std::vector<std::string> SolvingAlgorithm::selectNextGuess(MasterMind &game)
         return {};
     }
 
-    for (auto guessToCheck: possibleCodes)
+    for (StringVector guessToCheck: possibleCodes)
     {
-        std::string penis[4];
+        std::string codeConvertedToStringArr[4];
         for (int i = 0; i < 4; ++i)
         {
-            penis[i] = guessToCheck[i];
+            codeConvertedToStringArr[i] = guessToCheck[i];
         }
 
-        for (auto guess: possibleCodes)
+        for (StringVector guess: possibleCodes)
         {
-            game.getFeedback(guess, penis);
+            std::pair<int, int> feedback = game.getFeedback(guess, codeConvertedToStringArr);
+
+            int rightColors = feedback.first;
+            int rightPositions = feedback.second;
+
+
+//            std::cout << "feedback " << std::endl;
+//            std::cout << rightPositions << "|" << rightColors;
+//            std::cout << std::endl;
+
+
+
         }
     }
 

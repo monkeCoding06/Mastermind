@@ -15,16 +15,16 @@ void MasterMind::setColorCode()
 
 void MasterMind::printColorCode()
 {
-    std::cout << "------------------------------------------------------------------------------------------"
-              << std::endl;
+    std::cout << "------------------------------------------------------------------------------------------";
+    std::cout << std::endl;
     std::cout << "set color code: " << std::endl;
     for (auto &color: colorCode)
     {
         std::cout << "\t" << color;
     }
     std::cout << std::endl;
-    std::cout << "------------------------------------------------------------------------------------------"
-              << std::endl;
+    std::cout << "------------------------------------------------------------------------------------------";
+    std::cout << std::endl;
 }
 
 
@@ -35,13 +35,20 @@ MasterMind::MasterMind()
 }
 
 
-std::pair<int, int> MasterMind::getFeedback(const std::vector<std::string> &guess, std::string colorCodeToCheck[4])
+std::pair<int, int> MasterMind::getFeedback(const StringVector &guess, std::string colorCodeToCheck[4])
 {
-    for (int i = 0; i < 4; ++i)
-    {
-        std::cout << colorCodeToCheck[i] << " ";
-    }
-    std::cout << std::endl;
+//    for (int i = 0; i < 4; ++i)
+//    {
+//        std::cout << colorCodeToCheck[i] << " ";
+//    }
+//    std::cout << std::endl;
+//
+//
+//    for (int i = 0; i < 4; ++i)
+//    {
+//        std::cout << guess[i] << " ";
+//    }
+//    std::cout << std::endl;
 
     int rightPositions = 0;
     int rightColors = 0;
