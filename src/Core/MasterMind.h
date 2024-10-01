@@ -17,22 +17,26 @@ class MasterMind
 private:
     StringVector colorList = {"blue", "pink", "white", "red", "yellow", "grey"};
 
-    void setColorCode();
+    StringVector generateColorCode(int colorCodeLength);
 
     void printColorCode();
 
-public:
-    MasterMind();
+protected:
 
-    std::string colorCode[4] = {};
+    IntPair getFeedback(const StringVector &guess, StringVector &colorCodeToCheck);
+
+    StringVector colorCode;
+
 
     std::string gameField[12][4];
 
-    [[nodiscard]] StringVector getColorList() const { return colorList; }
+    [[nodiscard]] StringVector getColorList() const
+    { return colorList; }
 
-protected:
 
-    IntPair getFeedback(const std::vector<std::string> &guess, std::string colorCodeToCheck[4]);
+public:
+    explicit MasterMind(int codeLength);
+
 };
 
 #endif //MASTERMIND_MASTERMIND_H

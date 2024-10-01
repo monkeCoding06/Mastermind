@@ -1,14 +1,17 @@
 
 #include "MasterMind.h"
 
-void MasterMind::setColorCode()
+StringVector MasterMind::generateColorCode(int colorCodeLength)
 {
-    int colorCodeLength = std::end(colorCode) - std::begin(colorCode);
 
+    StringVector generatedColorCode;
     for (int i = 0; i < colorCodeLength; i++)
     {
-        colorCode[i] = colorList[RandomNumberGenerator::generateRandomNumber(0, 5)];
+        generatedColorCode.push_back(colorList[RandomNumberGenerator::generateRandomNumber(0, 5)]);
     }
+
+    colorCode = generatedColorCode;
+    return generatedColorCode;
 }
 
 void MasterMind::printColorCode()
@@ -26,14 +29,14 @@ void MasterMind::printColorCode()
 }
 
 
-MasterMind::MasterMind()
+MasterMind::MasterMind(int codeLength)
 {
-    this->setColorCode();
+    this->generateColorCode(codeLength);
     this->printColorCode();
 }
 
 
-IntPair MasterMind::getFeedback(const StringVector &guess, std::string colorCodeToCheck[4])
+IntPair MasterMind::getFeedback(const StringVector &guess, StringVector &colorCodeToCheck)
 {
 //    for (int i = 0; i < 4; ++i)
 //    {

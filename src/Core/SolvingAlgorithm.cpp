@@ -134,15 +134,9 @@ StringVector SolvingAlgorithm::selectNextGuess(MasterMind &game)
 
     for (StringVector guessToCheck: possibleCodes)
     {
-        std::string codeConvertedToStringArr[4];
-        for (int i = 0; i < 4; i++)
-        {
-            codeConvertedToStringArr[i] = guessToCheck[i];
-        }
-
         for (StringVector guess: possibleCodes)
         {
-            IntPair feedback = game.getFeedback(guess, codeConvertedToStringArr);
+            IntPair feedback = game.getFeedback(guess, guessToCheck);
 
             int rightColors = feedback.first;
             int rightPositions = feedback.second;
