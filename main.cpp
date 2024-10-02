@@ -5,11 +5,13 @@
 
 int main()
 {
-    MasterMind masterMind(4);
+    MasterMind masterMind;
+
+
     SolvingAlgorithm solvingAlgorithm(masterMind);
 
     int amountOfMoves = solvingAlgorithm.solve(masterMind);
 
     std::cout << std::endl << "\n\tamount of moves it took!: " << amountOfMoves << std::endl;
-
+    return 0;
 }

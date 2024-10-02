@@ -22,6 +22,8 @@ private:
 
     void printColorCode();
 
+    void setColorCode(StringVector &code);
+
 protected:
 
     IntPair getFeedback(const StringVector &guess, StringVector &colorCodeToCheck);
@@ -29,8 +31,7 @@ protected:
     StringVector colorCode;
 
 
-    std::string gameField[12][4];
-//    std::vector<std::vector<std::string>> gameField;
+    std::vector<std::vector<std::string>> gameField;
 
 
     [[nodiscard]] StringVector getColorList() const
@@ -38,16 +39,17 @@ protected:
 
     int amountOfColors = colorList.size();
     int possibilities;
-    int codeLength;
+    int codeLength = 4;
 
 
 public:
-    explicit MasterMind(int length)
+    explicit MasterMind()
     {
-        this->codeLength = length;
         this->possibilities = pow(amountOfColors, codeLength);
+        gameField.resize(12, std::vector<std::string>(codeLength));
 
-        StringVector codeToSet = this->generateColorCode(length);
+
+        StringVector codeToSet = this->generateColorCode(4);
         this->setColorCode(codeToSet);
         this->printColorCode();
     }
@@ -56,14 +58,26 @@ public:
     {
 
         this->codeLength = code.size();
+        if (codeLength != 4)
+        {
+            std::cerr << "Error: The code you entered is " << this->codeLength << " long, but it has to be 4"
+                      << std::endl << "____________________________________________________________________"
+                      << std::endl << "MasterMind(std::vector<std::string>(4))" << std::endl
+                      << "                                    ^" << std::endl
+                      << "                                    | vector has to have 4 elements" << std::endl
+                      << "____________________________________________________________________" << std::endl;
+            return;
+        }
+
         this->possibilities = pow(amountOfColors, codeLength);
+        gameField.resize(12, std::vector<std::string>(codeLength));
+
 
         this->setColorCode(code);
         this->printColorCode();
     }
 
 
-    void setColorCode(StringVector &code);
 };
 
 #endif //MASTERMIND_MASTERMIND_H

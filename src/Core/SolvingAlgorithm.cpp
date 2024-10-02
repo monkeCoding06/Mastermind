@@ -6,6 +6,11 @@
 
 SolvingAlgorithm::SolvingAlgorithm(MasterMind &game)
 {
+    if (game.codeLength != 4)
+    {
+        return;
+    }
+
     StringVector colors = game.getColorList();
     currentGuess = {colors[0], colors[0], colors[1], colors[1]};
     createPossibilities(game);
@@ -39,10 +44,8 @@ int SolvingAlgorithm::solve(MasterMind &game)
 
 void SolvingAlgorithm::makeFirstGuess(MasterMind &game)
 {
-    for (int i = 0; i < 4; i++)
-    {
-        game.gameField[gameMove][i] = currentGuess[i];
-    }
+    std::copy(currentGuess.begin(), currentGuess.end(), game.gameField[gameMove].begin());
+
     gameMove++;
 }
 
@@ -51,7 +54,7 @@ void SolvingAlgorithm::createPossibilities(MasterMind &game)
     StringVector colorList = game.getColorList();
     for (int i = 0; i < game.possibilities; i++)
     {
-        StringVector possibility(4);
+        StringVector possibility(game.codeLength);
         int code = i;
         for (int j = 3; j >= 0; j--)
         {
@@ -65,8 +68,10 @@ void SolvingAlgorithm::createPossibilities(MasterMind &game)
 
 
 void
-SolvingAlgorithm::eliminateImpossibleCodes(const StringVector &guess, int rightColors, int rightPositions)
+SolvingAlgorithm::eliminateImpossibleCodes(const StringVector &guess, int rightColors, int rightPositions,
+                                           MasterMind &game)
 {
+    int codeLength = game.codeLength;
     auto iterator = possibleCodes.begin();
     while (iterator != possibleCodes.end())
     {
@@ -75,10 +80,10 @@ SolvingAlgorithm::eliminateImpossibleCodes(const StringVector &guess, int rightC
 
         StringVector possibleCode = *iterator;
 
-        BoolVector matchedGuess(4, false);
-        BoolVector matchedCode(4, false);
+        BoolVector matchedGuess(codeLength, false);
+        BoolVector matchedCode(codeLength, false);
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < codeLength; i++)
         {
             if (possibleCode[i] == guess[i])
             {
@@ -88,14 +93,14 @@ SolvingAlgorithm::eliminateImpossibleCodes(const StringVector &guess, int rightC
             }
         }
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < codeLength; i++)
         {
             if (matchedGuess[i])
             {
                 continue;
             }
 
-            for (int j = 0; j < 4; j++)
+            for (int j = 0; j < codeLength; j++)
             {
                 if (matchedCode[j])
                 {
@@ -170,7 +175,7 @@ void SolvingAlgorithm::performNewGuessBasedOnFeedback(MasterMind &game)
 
     std::cout << " | Feedback - Right colors: " << rightColors << ", Right positions: " << rightPositions << std::endl;
 
-    eliminateImpossibleCodes(currentGuess, rightColors, rightPositions);
+    eliminateImpossibleCodes(currentGuess, rightColors, rightPositions, game);
 
     if (possibleCodes.empty())
     {
@@ -179,11 +184,7 @@ void SolvingAlgorithm::performNewGuessBasedOnFeedback(MasterMind &game)
     }
 
     currentGuess = selectNextGuess(game);
-    for (int i = 0; i < 4; i++)
-    {
-        game.gameField[gameMove][i] = currentGuess[i];
-    }
-
+    std::copy(currentGuess.begin(), currentGuess.end(), game.gameField[gameMove].begin());
     gameMove++;
 }
 
@@ -194,7 +195,7 @@ void SolvingAlgorithm::printGameField(MasterMind &game) const
     std::cout << gameMove;
 
     auto gameField = game.gameField;
-    for (int j = 0; j < 4; j++)
+    for (int j = 0; j < game.codeLength; j++)
     {
         std::cout << "\t" << gameField[gameMove - 1][j];
     }

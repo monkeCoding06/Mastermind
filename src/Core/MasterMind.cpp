@@ -52,9 +52,9 @@ IntPair MasterMind::getFeedback(const StringVector &guess, StringVector &colorCo
 
     int rightPositions = 0;
     int rightColors = 0;
-    int length = this->codeLength;
-    bool matchedSecret[4] = {false};
-    bool matchedGuess[4] = {false};
+    std::vector<bool> matchedSecret(codeLength, false);
+    std::vector<bool> matchedGuess(codeLength, false);
+
 
     for (int i = 0; i < 4; ++i)
     {

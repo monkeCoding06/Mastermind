@@ -16,7 +16,7 @@ public:
     int solve(MasterMind &game);
 
 private:
-    void eliminateImpossibleCodes(const std::vector<std::string>& guess, int rightColors, int rightPositions);
+    void eliminateImpossibleCodes(const StringVector & guess, int rightColors, int rightPositions,  MasterMind &game);
     StringVector selectNextGuess(MasterMind &game);
 
     int gameMove = 0;
