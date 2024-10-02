@@ -49,7 +49,7 @@ void SolvingAlgorithm::makeFirstGuess(MasterMind &game)
 void SolvingAlgorithm::createPossibilities(MasterMind &game)
 {
     StringVector colorList = game.getColorList();
-    for (int i = 0; i < 1296; i++)
+    for (int i = 0; i < game.possibilities; i++)
     {
         StringVector possibility(4);
         int code = i;
@@ -60,7 +60,7 @@ void SolvingAlgorithm::createPossibilities(MasterMind &game)
         }
         possibleCodes.push_back(possibility);
     }
-    std::cout << "Total possibilities: " << possibleCodes.size() << std::endl;
+    std::cout << "Total possibilities: " << game.possibilities << std::endl;
 }
 
 
@@ -162,7 +162,7 @@ void SolvingAlgorithm::performNewGuessBasedOnFeedback(MasterMind &game)
     int rightColors = feedback.first;
     int rightPositions = feedback.second;
 
-    if (rightPositions == 4)
+    if (rightPositions == game.codeLength)
     {
         solved = true;
         return;
